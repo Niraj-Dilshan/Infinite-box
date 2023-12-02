@@ -1,6 +1,6 @@
 # Infinite Box
 
-A super cool and easy-to-use Dockerized environment with qBittorrent, FileBrowser, and more!
+Welcome to Infinite Box, a super cool and easy-to-use Dockerized environment designed to empower users with seamless access to powerful tools like qBittorrent and FileBrowser.
 
 ## Features
 
@@ -27,6 +27,60 @@ A super cool and easy-to-use Dockerized environment with qBittorrent, FileBrowse
     **FileBrowser Login Information:**
     - Username: admin
     - Password: admin
+
+## Infinite Box Project Overview
+
+### Technologies Used
+
+#### 1. qBittorrent
+
+- **Description:** qBittorrent is an open-source BitTorrent client known for its powerful yet user-friendly interface. It supports advanced features such as sequential downloading, torrent prioritization, and provides a web-based UI for remote management.
+
+- **Role in Project:** qBittorrent serves as the primary BitTorrent client, enabling users to download, upload, and manage torrents. Its web-based interface makes it accessible from anywhere.
+
+#### 2. FileBrowser
+
+- **Description:** FileBrowser is a straightforward web-based file management tool. It allows users to navigate, upload, download, and share files through an intuitive interface.
+
+- **Role in Project:** FileBrowser complements qBittorrent by providing a web-based file management system. Users can organize, access, and share their downloaded files using FileBrowser.
+
+## Project Architecture Overview
+
+### Infinite Box Setup
+
+The Infinite Box project combines qBittorrent and FileBrowser within a Dockerized environment for ease of deployment and management.
+
+### Docker Containers
+
+#### qBittorrent Container
+
+- Hosts the qBittorrent application.
+- Exposes a web-based user interface accessible at [http://localhost:8181](http://localhost:8181).
+- Downloads and manages torrents on the host system.
+
+#### FileBrowser Container
+
+- Hosts the FileBrowser application.
+- Provides a web-based file management interface at [http://localhost:8180](http://localhost:8180).
+- Allows users to navigate, upload, and download files.
+
+#### Interaction
+
+- Users interact with the qBittorrent and FileBrowser interfaces through web browsers. qBittorrent manages BitTorrent activities, while FileBrowser handles file management.
+
+#### Configuration
+
+- The project utilizes a configuration file (`.env`) for customization, allowing users to set ports and other parameters during installation.
+
+#### Ease of Use
+
+- The installation script (`infinitybox_install.sh`) streamlines the setup process, prompting users for necessary configurations.
+
+#### Portability
+
+- Docker containers ensure portability and easy deployment across different environments.
+
+This architecture provides users with a seamless and accessible solution for torrenting and file management through a unified and user-friendly web interface.
 
 ## Credits
 
