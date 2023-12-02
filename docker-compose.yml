@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: infinity_box_qbittorrent
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Etc/UTC
+      - WEBUI_PORT=8181
+    ports:
+      - "8181:8080"
+      - "6881:6881"
+      - "6881:6881/udp"
+    volumes:
+      - ./config:/config
+      - /root/downloads:/downloads
+    restart: unless-stopped
+
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: infinity_box_filebrowser
+    volumes:
+      - /root/Downloads:/srv
+      - ./filebrowser.db:/database.db
+      - ./.filebrowser.json:/.filebrowser.json
+    user: "${UID}:${GID}"
+    ports:
+      - "8180:80"
+    restart: unless-stopped
