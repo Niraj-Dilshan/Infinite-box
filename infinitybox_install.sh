@@ -168,3 +168,9 @@ MACHINE_IP=$(hostname -I | cut -d ' ' -f1)
 
 echo -e "${YELLOW}Access qBittorrent at: http://${MACHINE_IP}:${QB_PORT}${NC}"
 echo -e "${YELLOW}Access File Server at: http://${MACHINE_IP}:${FILE_SERVER_PORT}${NC}"
+
+# Display FileBrowser login information
+echo -e "${YELLOW}FileBrowser Login Information:${NC}"
+echo -e "URL: http://${MACHINE_IP}:${FILE_SERVER_PORT}"
+echo -e "Username: admin"
+echo -e "Password: admin${NC}"
