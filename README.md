@@ -15,9 +15,7 @@ Welcome to Infinite Box, a super cool and easy-to-use Dockerized environment des
 1. To quickly install Infinite Box, run the following commands:
 
     ```bash
-    sudo wget https://raw.githubusercontent.com/Niraj-Dilshan/Infinite-box/main/infinitybox_install.sh
-    chmod +x infinitybox_install.sh
-    ./infinitybox_install.sh
+    sudo wget https://raw.githubusercontent.com/Niraj-Dilshan/Infinite-box/main/infinitybox_install.sh && chmod +x infinitybox_install.sh && ./infinitybox_install.sh
     ```
 2. Follow the prompts to configure ports for qBittorrent and FileBrowser.
 
