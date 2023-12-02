@@ -23,8 +23,6 @@ services:
     container_name: infinity_box_filebrowser
     volumes:
       - /root/Downloads:/srv
-      - ./filebrowser/:/database.db
-      - ./filebrowser/:/.filebrowser.json
     user: "${UID}:${GID}"
     ports:
       - "${FILE_SERVER_PORT}:80"
