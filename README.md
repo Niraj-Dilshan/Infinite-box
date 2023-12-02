@@ -1,11 +1,12 @@
 # Infinite Box
 
-Welcome to Infinite Box, a super cool and easy-to-use Dockerized environment designed to empower users with seamless access to powerful tools like qBittorrent and FileBrowser.
+Welcome to Infinite Box, a super cool and easy-to-use Dockerized environment designed to empower users with seamless access to powerful tools like qBittorrent and FileBrowser. This is supper easy to use easy to setup more secure seedbox environment.
 
 ## Features
 
 - **qBittorrent**: A powerful and easy-to-use BitTorrent client with a web-based user interface.
 - **FileBrowser**: A simple file management and sharing web tool.
+- **One Command Install**: Full script will run from single command
 
 ## Quick Start
 

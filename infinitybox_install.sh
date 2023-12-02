@@ -93,6 +93,8 @@ get_user_input() {
     # Update .env file
     echo "WEBUI_PORT=$QB_PORT" > .env
     echo "FILE_SERVER_PORT=$FILE_SERVER_PORT" >> .env
+    echo "UID"=1000 >> .env
+    echo "GID"=1000 >> .env
 }
 
 # Display the custom ASCII art message
@@ -152,10 +154,10 @@ if [[ ! $REPLY =~ ^[Yy]$ ]]; then
 fi
 
 # Pull Docker images
-docker-compose pull
+docker-compose --project-name infinitybox pull
 
 # Create and start the Docker containers
-docker-compose up -d
+docker-compose --project-name infinitybox up -d
 
 echo -e "${GREEN}Installation completed successfully INFINITY Box is up and ready.${NC}"
 
