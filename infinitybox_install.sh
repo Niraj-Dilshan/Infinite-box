@@ -93,8 +93,8 @@ get_user_input() {
     # Update .env file
     echo "WEBUI_PORT=$QB_PORT" > .env
     echo "FILE_SERVER_PORT=$FILE_SERVER_PORT" >> .env
-    echo "UID"=1000 >> .env
-    echo "GID"=1000 >> .env
+    echo "UID=1000" >> .env
+    echo "GID=1000" >> .env
 }
 
 # Display the custom ASCII art message
