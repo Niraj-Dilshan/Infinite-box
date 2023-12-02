@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Colors for text formatting
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[1;33m'
+NC='\033[0m' # No Color
+
 # Function to check the Linux distribution
 check_distribution() {
     if [ -f "/etc/os-release" ]; then
@@ -9,13 +15,14 @@ check_distribution() {
         source /etc/lsb-release
         DISTRIBUTION=$DISTRIB_ID
     else
-        echo "Unable to determine the Linux distribution. Exiting."
+        echo -e "${RED}Unable to determine the Linux distribution. Exiting.${NC}"
         exit 1
     fi
 }
 
 # Function to perform system updates based on the distribution
 perform_system_updates() {
+    echo -e "${YELLOW}Updating system...${NC}"
     case $DISTRIBUTION in
         "ubuntu" | "debian")
             apt update && apt upgrade -y
@@ -24,7 +31,7 @@ perform_system_updates() {
             dnf update -y
             ;;
         *)
-            echo "Unsupported distribution: $DISTRIBUTION. Exiting."
+            echo -e "${RED}Unsupported distribution: $DISTRIBUTION. Exiting.${NC}"
             exit 1
             ;;
     esac
@@ -32,6 +39,7 @@ perform_system_updates() {
 
 # Function to install Docker based on the distribution
 install_docker() {
+    echo -e "${YELLOW}Installing Docker...${NC}"
     case $DISTRIBUTION in
         "ubuntu" | "debian")
             apt install docker.io -y
@@ -40,7 +48,7 @@ install_docker() {
             dnf install docker -y
             ;;
         *)
-            echo "Unsupported distribution: $DISTRIBUTION. Exiting."
+            echo -e "${RED}Unsupported distribution: $DISTRIBUTION. Exiting.${NC}"
             exit 1
             ;;
     esac
@@ -48,6 +56,7 @@ install_docker() {
 
 # Function to install Docker Compose based on the distribution
 install_docker_compose() {
+    echo -e "${YELLOW}Installing Docker Compose...${NC}"
     case $DISTRIBUTION in
         "ubuntu" | "debian")
             apt install docker-compose -y
@@ -56,7 +65,7 @@ install_docker_compose() {
             dnf install docker-compose -y
             ;;
         *)
-            echo "Unsupported distribution: $DISTRIBUTION. Exiting."
+            echo -e "${RED}Unsupported distribution: $DISTRIBUTION. Exiting.${NC}"
             exit 1
             ;;
     esac
@@ -64,7 +73,7 @@ install_docker_compose() {
 
 # Check if Git is installed
 if ! command -v git &> /dev/null; then
-    echo "Git is not installed. Installing Git..."
+    echo -e "${YELLOW}Git is not installed. Installing Git...${NC}"
     check_distribution
     case $DISTRIBUTION in
         "ubuntu" | "debian")
@@ -74,14 +83,14 @@ if ! command -v git &> /dev/null; then
             dnf install git -y
             ;;
         *)
-            echo "Unsupported distribution: $DISTRIBUTION. Exiting."
+            echo -e "${RED}Unsupported distribution: $DISTRIBUTION. Exiting.${NC}"
             exit 1
             ;;
     esac
 fi
 
 # Clone the GitHub repository
-echo "Cloning the Infinite-box repository..."
+echo -e "${YELLOW}Cloning the Infinite-box repository...${NC}"
 git clone https://github.com/Niraj-Dilshan/Infinite-box.git
 
 # Change into the repository directory
@@ -91,33 +100,30 @@ cd Infinite-box || exit
 check_distribution
 
 # Perform system updates
-echo "Updating system..."
 perform_system_updates
 
 # Check if Docker is installed
 if ! command -v docker &> /dev/null; then
-    echo "Docker is not installed. Installing Docker..."
     install_docker
 fi
 
 # Check if Docker Compose is installed
 if ! command -v docker-compose &> /dev/null; then
-    echo "Docker Compose is not installed. Installing Docker Compose..."
     install_docker_compose
 fi
 
 # Check if the .env file exists
 if [ ! -f .env ]; then
-    echo "Error: The .env file is missing. Please create the .env file with the required environment variables."
+    echo -e "${RED}Error: The .env file is missing. Please create the .env file with the required environment variables.${NC}"
     exit 1
 fi
 
 # Display a warning about overwriting existing containers
-read -p "Warning: This script will attempt to recreate containers. Do you want to continue? (y/n): " -r
+read -p "${YELLOW}Warning: This script will attempt to recreate containers. Do you want to continue? (y/n): ${NC}" -r
 echo
 
 if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    echo "Installation aborted."
+    echo -e "${RED}Installation aborted.${NC}"
     exit 1
 fi
 
@@ -127,4 +133,4 @@ docker-compose pull
 # Create and start the Docker containers
 docker-compose up -d
 
-echo "Installation completed successfully."
+echo -e "${GREEN}Installation completed successfully.${NC}"
