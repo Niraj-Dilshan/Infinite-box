@@ -184,6 +184,7 @@ echo -e "Password: admin${NC}"
 # Retrieve and display qBittorrent Docker container logs
 QB_LOGS=$(docker-compose --project-name infinitybox logs qbittorrent 2>&1)
 
+sleep 10
 # Extract and display the temporary password
 TEMP_PASSWORD=$(echo "$QB_LOGS" | grep -oP "The WebUI administrator password was not set. A temporary password is provided for this session: \K\S+")
 
