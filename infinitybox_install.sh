@@ -170,7 +170,7 @@ QB_PORT=$(grep WEBUI_PORT .env | cut -d '=' -f2)
 FILE_SERVER_PORT=$(grep FILE_SERVER_PORT .env | cut -d '=' -f2)
 
 # Get the machine's IP address
-MACHINE_IP=$(hostname -I | cut -d ' ' -f1)
+MACHINE_IP=curl ipinfo.io/ip
 
 echo -e "${YELLOW}Access qBittorrent at: http://${MACHINE_IP}:${QB_PORT}${NC}"
 echo -e "${YELLOW}Access File Server at: http://${MACHINE_IP}:${FILE_SERVER_PORT}${NC}"
