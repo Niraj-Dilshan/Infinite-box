@@ -175,12 +175,6 @@ MACHINE_IP=$(curl ipinfo.io/ip)
 echo -e "${YELLOW}Access qBittorrent at: http://${MACHINE_IP}:${QB_PORT}${NC}"
 echo -e "${YELLOW}Access File Server at: http://${MACHINE_IP}:${FILE_SERVER_PORT}${NC}"
 
-# Display FileBrowser login information
-echo -e "${YELLOW}FileBrowser Login Information:${NC}"
-echo -e "URL: http://${MACHINE_IP}:${FILE_SERVER_PORT}"
-echo -e "Username: admin"
-echo -e "Password: admin${NC}"
-
 # Retrieve and display qBittorrent Docker container logs
 QB_LOGS=$(docker-compose --project-name infinitybox logs qbittorrent 2>&1)
 
@@ -188,8 +182,20 @@ sleep 10
 # Extract and display the temporary password
 TEMP_PASSWORD=$(echo "$QB_LOGS" | grep -oP "The WebUI administrator password was not set. A temporary password is provided for this session: \K\S+")
 
-# Display FileBrowser login information
+# Retrieve and display FileBrowser Docker container logs
+FB_LOGS=$(docker-compose --project-name infinitybox logs filebrowser 2>&1)
+
+# Extract and display the temporary password for FileBrowser
+FB_TEMP_PASSWORD=$(echo "$FB_LOGS" | grep -oP "User 'admin' initialized with randomly generated password: \K\S+")
+
+# Display qBittorrent login information
 echo -e "${YELLOW}qBittorrent Login Information:${NC}"
 echo -e "URL: http://${MACHINE_IP}:${QB_PORT}"
 echo -e "Username: admin"
 echo -e "Temporary Password: ${TEMP_PASSWORD}${NC}"
+
+# Display FileBrowser login information
+echo -e "${YELLOW}FileBrowser Login Information:${NC}"
+echo -e "URL: http://${MACHINE_IP}:${FILE_SERVER_PORT}"
+echo -e "Username: admin"
+echo -e "Temporary Password: ${FB_TEMP_PASSWORD}${NC}"
