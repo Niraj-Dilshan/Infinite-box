@@ -12,20 +12,37 @@ Welcome to Infinite Box, a super cool and easy-to-use Dockerized environment des
 
 ### Installation
 
-1. To quickly install Infinite Box, run the following commands:
+There are two ways to install Infinite Box:
 
-    ```bash
-    sudo rm -f infinitybox_install.sh && sudo rm -rf Infinite-box && sudo apt-get update && sudo apt-get install wget -y && sudo wget https://raw.githubusercontent.com/Niraj-Dilshan/Infinite-box/main/infinitybox_install.sh && chmod +x infinitybox_install.sh && ./infinitybox_install.sh
-    ```
-2. Follow the prompts to configure ports for qBittorrent and FileBrowser.
+**1. Standard Installation (qBittorrent + FileBrowser)**
 
-3. Once the installation is complete, access your services:
-    - qBittorrent: [http://localhost:8181](http://localhost:8181) (Default ports)
-    - FileBrowser: [http://localhost:8180](http://localhost:8180) (Default ports)
+To quickly install the standard version of Infinite Box, run the following command:
 
-    **FileBrowser Login Information:**
-    - Username: admin
-    - Password: admin
+```bash
+sudo rm -f infinitybox_install.sh && sudo rm -rf Infinite-box && sudo apt-get update && sudo apt-get install wget -y && sudo wget https://raw.githubusercontent.com/Niraj-Dilshan/Infinite-box/main/infinitybox_install.sh && chmod +x infinitybox_install.sh && ./infinitybox_install.sh
+```
+
+**2. Installation with Jellyfin Media Server**
+
+If you want to include the Jellyfin media server for streaming your downloaded content, use this command instead:
+
+```bash
+sudo rm -f infinitybox_jellyfin_install.sh && sudo rm -rf Infinite-box && sudo apt-get update && sudo apt-get install wget -y && sudo wget https://raw.githubusercontent.com/Niraj-Dilshan/Infinite-box/main/infinitybox_jellyfin_install.sh && chmod +x infinitybox_jellyfin_install.sh && ./infinitybox_jellyfin_install.sh
+```
+
+After running either of the installation commands, follow the prompts to configure the necessary ports.
+
+### Accessing Your Services
+
+Once the installation is complete, you can access your services at the following default ports (or the custom ports you configured):
+
+- **qBittorrent**: `http://localhost:8181`
+- **FileBrowser**: `http://localhost:8180`
+- **Jellyfin** (if installed): `http://localhost:8096`
+
+**FileBrowser Login Information:**
+- Username: admin
+- Password: admin
 
 ## Infinite Box Project Overview
 
@@ -43,6 +60,11 @@ Welcome to Infinite Box, a super cool and easy-to-use Dockerized environment des
 
 - **Role in Project:** FileBrowser complements qBittorrent by providing a web-based file management system. Users can organize, access, and share their downloaded files using FileBrowser.
 
+#### 3. Jellyfin (Optional)
+
+- **Description:** Jellyfin is a free and open-source media server that allows you to organize, manage, and stream your media files.
+- **Role in Project:** When installed, Jellyfin provides a complete media center solution, allowing you to stream the content downloaded via qBittorrent to various devices.
+
 ## Project Architecture Overview
 
 ### Infinite Box Setup
@@ -54,18 +76,24 @@ The Infinite Box project combines qBittorrent and FileBrowser within a Dockerize
 #### qBittorrent Container
 
 - Hosts the qBittorrent application.
-- Exposes a web-based user interface accessible at [http://localhost:8181](http://localhost:8181).
+- Exposes a web-based user interface accessible at `http://localhost:8181`.
 - Downloads and manages torrents on the host system.
 
 #### FileBrowser Container
 
 - Hosts the FileBrowser application.
-- Provides a web-based file management interface at [http://localhost:8180](http://localhost:8180).
+- Provides a web-based file management interface at `http://localhost:8180`.
 - Allows users to navigate, upload, and download files.
+
+#### Jellyfin Container (Optional)
+
+- Hosts the Jellyfin media server application.
+- Provides a web-based media streaming interface at `http://localhost:8096`.
+- Allows users to stream media from the shared download directory.
 
 #### Interaction
 
-- Users interact with the qBittorrent and FileBrowser interfaces through web browsers. qBittorrent manages BitTorrent activities, while FileBrowser handles file management.
+- Users interact with the qBittorrent, FileBrowser, and Jellyfin interfaces through web browsers. qBittorrent manages BitTorrent activities, FileBrowser handles file management, and Jellyfin provides media streaming.
 
 #### Configuration
 
@@ -73,7 +101,7 @@ The Infinite Box project combines qBittorrent and FileBrowser within a Dockerize
 
 #### Ease of Use
 
-- The installation script (`infinitybox_install.sh`) streamlines the setup process, prompting users for necessary configurations.
+- The installation scripts (`infinitybox_install.sh` and `infinitybox_jellyfin_install.sh`) streamline the setup process, prompting users for necessary configurations.
 
 #### Portability
 
@@ -87,6 +115,7 @@ This project uses the following Docker images:
 
 - [LinuxServer/qBittorrent](https://hub.docker.com/r/linuxserver/qbittorrent): Docker image for qBittorrent.
 - [FileBrowser/FileBrowser](https://hub.docker.com/r/filebrowser/filebrowser): Docker image for FileBrowser.
+- [Jellyfin/Jellyfin](https://hub.docker.com/r/jellyfin/jellyfin): Docker image for Jellyfin.
 
 ## License
 
